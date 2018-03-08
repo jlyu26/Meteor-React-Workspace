@@ -97,3 +97,34 @@ The WebApp object is essentially the actual server component of Meteor. It's a p
 ## 12. Update Records in a Collection
 
 Use a system called **Mongo-Style Modifiers** [[Document]](https://docs.meteor.com/api/collections.html#modifiers), which is an convention(惯例) on how to update records saved in a Mongo database. Mongo modifiers are JavaScript objects that describe a precise operation to take on a record that we're updating. `Links.update(link, { $inc: { clicks: 1 } });`
+
+## 13. Meteor Authentication System
+
+ Meteor has already wired up to handle authentication, and all we have to do is show the UI required to display a form to the user to be able to sign up and sign in. There're some different rendering libraries available to Meteor, like Angular and React, and Meteor's default rendering package [[Blaze]](https://guide.meteor.com/blaze.html). Blaze system ships with complete forms for handling all of the authentication logic required. We just need to use Blaze to render the forms onto the screen.
+
+ However, in the workspace project we're using React not Blaze. To use Blaze logic with React library, we need two Meteor packages, `accounts-ui` and `accounts-password`.
+
+## 14. Use React with Third Party Libraries
+
+When using third party libraries (Blaze, D3, jQuery, Backbone, etc.) with React, in general, we let the React component render like usual, and after it gets rendered to the DOM, we reach into the DOM and 'finagle' with it in some fashion. After we're done with that when the components about to unmount, we need to go back in and clean up after ourselves.
+
+```JavaScript
+class Accounts extends Component {
+	componentDidMount() {
+		this.view = Blaze.render(Template.loginButtons, 
+			ReactDOM.findDOMNode(this.refs.container));
+	}
+
+	componentWillUnmount() {
+		Blaze.remove(this.view);
+	}
+
+	render() {
+		return (
+			<div ref="container"></div>
+		);
+	}
+}
+```
+
+## 15. 
