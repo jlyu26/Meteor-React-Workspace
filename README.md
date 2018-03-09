@@ -127,4 +127,16 @@ class Accounts extends Component {
 }
 ```
 
-## 15. 
+## 15. React Codemirror, NPM markdown and XSS
+
+[[Document]](https://github.com/JedWatson/react-codemirror)
+
+The excellent [CodeMirror](https://codemirror.net/) editor as a React.js component.
+
+NPM markdown [[Document]](https://www.npmjs.com/package/markdown#usage): Take a string of markdown and translate it to HTML **string**. To convert raw string to HTML symbol and render it on to the page, use 
+
+```html
+<div dangerouslySetInnerHTML={{ __html: rawHTML }}></div>
+```
+
+Do notice that by doing so, we're opening ourselves to **XSS (Cross Site Scripting) attacks**, of which a malicious user can inject JavaScript or otherwise modify another user's experience on application.
